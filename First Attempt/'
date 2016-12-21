@@ -1,0 +1,68 @@
+(* ****** ****** *)
+//
+// UnboxedWM
+// Author: Ryan King <rtking@bu.edu>
+//
+(* ****** ****** *)
+
+(* ****** ****** *)
+#include "share/atspre_define.hats"
+#include "share/atspre_staload.hats"
+#include "share/HATS/atspre_staload_libats_ML.hats"
+
+#include "UnboxedWM_main.dats"
+
+// #include "./UnboxedWM_main.dats"
+// #include "./UnboxedWM_menu.dats"
+
+(* ****** ****** *)
+
+  (*
+(* ****** ****** *)
+
+abst@ype pid_t = $extype"pid_t"
+
+(* ****** ****** *)
+
+macdef WNOHANG = $extval(int, "wnohang")
+
+(* ****** ****** *)
+
+extern
+fun getenv(string): string = "mac#%"
+
+extern
+fun waitpid(pid: pid_t, stat_loc: &int? >> _, options: int): pid_t = "mac#%"
+
+implement main0() = () where {
+  exception NoDisplay of ()
+  val exit = false
+  val restart = false
+  val font = 0
+  val fname = 0
+  val shell = getenv("SHELL")
+  val shell = if shell = "" then "/bin/sh" else shell
+  val disp = XOpenDisplay("")
+  val () = assertloc(ptrcast(disp) > 0)
+  val ret = XCloseDisplay(disp)
+  val initting = 1
+}
+*)
+
+implement main0(argc, argv) =
+  let
+    val do_exit = false and do_restart = false
+    val font = $UN.cast{XFontStruct}(0)
+    val fname = ""
+    val dpy = XOpenDisplay("")
+    val () = assertloc(ptrcast(dpy) > 0)
+    val shell = getenv("HELL")
+    val () = println!(shell)
+    val () = (if iseqz(shell) then println!("Null shell") else println!("Non null"))
+    val () = println!($UN.cast{string}(shell))
+    val scr = init_screen(dpy)
+    val foo = XCloseDisplay(dpy)
+    val () = println!("Yay?")
+  in
+  ()
+  end
